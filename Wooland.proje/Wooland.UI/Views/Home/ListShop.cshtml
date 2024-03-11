@@ -1,0 +1,118 @@
+﻿@model ICollection<Product>
+<!-- Shop listing Area BEGIN -->
+<section class="shop-listing-cc2 blog_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="shop_list shop_list2">
+							<div class="showing_result">
+								<a href=""><span>SEZON ÜRÜNLERİ</span></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="sorting_right">
+							<div class="sort_by">
+								<span>SORT BY</span>
+							</div>
+							<div class="newest-oldest">
+								<div class="form-group">
+									<select class="form-control" id="sel1">
+										<option>Newest</option>
+										<option>Oldest</option>
+										<option>Popular</option>
+										<option>Best seller</option>
+										<option>Upcoming</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row">
+					@foreach (var p in Model)
+					{
+						<div class="col-md-3 col-sm-3 col-xs-12">
+							<div class="single_suite">
+								<div class="single_suite_img1 hover_img effect">
+									<a ><img src="
+                                    @{
+                                        if(p.ProductPicture != null)
+                                             {
+								                 Write(p.ProductPicture.First().Picture);
+                                             }
+										else {
+											Write("/img/hazirlaniyor.jpg");
+}
+                                     }" alt="@p.Name"></a>
+									<div class="cc_hover">
+										
+									</div>
+									<div class="common_overlay"></div>
+								</div>
+								<div class="single_suite_text">
+									<a asp-controller="Product" asp-action="Detail" asp-route-id="@p.ID" asp-route-name="@p.Name"><h3>@p.Name</h3></a>
+								</div>
+								<div class="single_suite_left">
+									<div class="suite_left_p"><p>₺@p.Price</p></div>
+								</div>
+								<div class="single_suite_right">
+									<ul>
+										@{
+											int starCount = p.Star; 
+											int emptyStarCount = 5 - starCount; 
+										}
+										@for (int x = 0; x < starCount; x++)
+										{
+											<i class="fa fa-star"></i>
+										}
+										@for (int x = 0; x < emptyStarCount; x++)
+										{
+											<i class="fa fa-star-o"></i>
+										}
+									</ul>
+								</div>
+							</div>
+
+
+						</div>
+					}
+					
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Shop listing Area END -->
+<!-- Pagination START -->
+<div class="shop_pagination_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="cc-pagination">
+					<div class="pev-page">
+						<a class="p-prev" href="#">Önceki</a>
+					</div>
+					<div class="pagi-box">
+						<ul class="pagination">
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+						</ul>
+					</div>
+					<div class="next-page">
+						<a class="p-prev" href="#">Sonraki</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Pagination END -->

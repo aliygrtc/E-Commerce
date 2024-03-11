@@ -1,0 +1,106 @@
+﻿@model IndexVM
+<div class="slider_area">
+	<div class="fullwidthbanner-container">
+		<div class="fullwidthbanner">
+			<ul>
+			@foreach (Slide s in Model.Slides)
+			{
+				
+					<li data-transition="random" data-slotamount="7" data-masterspeed="1000">
+						<img src="@s.Picture" alt="slide">
+
+						<div class="tp-caption large_black sfr"
+							 data-x="120"
+							 data-y="140"
+							 data-speed="1100"
+							 data-start="1100"
+							 data-easing="easeInOutBack"
+							 data-elementdelay="0"
+							 data-endelementdelay="0"
+							 data-end="4700"
+							 data-endspeed="300"
+							 style="font-size: 72px; font-weight: 600; text-transform:uppercase; color: #fff;font-family: 'Libre Baskerville';font-style:normal;">
+							@s.Title
+						</div>
+						<div class="tp-caption large_black sfr"
+							 data-x="120"
+							 data-y="210"
+							 data-speed="1100"
+							 data-start="1400"
+							 data-easing="easeInOutBack"
+							 data-elementdelay="0"
+							 data-endelementdelay="0"
+							 data-end="5700"
+							 data-endspeed="300"
+							 style="font-family: 'Libre Baskerville'; font-size: 55px; font-weight: 400; line-height:80px;text-transform: uppercase; color: #fff;">
+							@s.Slogan
+						</div>
+
+						<div class="tp-caption tp-fade start"
+							 data-x="120"
+							 data-y="350"
+							 data-endspeed="300"
+							 data-end="7700"
+							 data-endelementdelay="0"
+							 data-elementdelay="0"
+							 data-easing="Power3.easeInOut"
+							 data-start="1100"
+							 data-speed="300"
+							 style="font-family: 'karla', sans-serif; font-size: 16px; font-weight: 400; line-height:20px;text-transform:inherit; color: #fff;">
+							@s.Description
+						</div>
+
+
+						<div class="tp-caption sft"
+							 data-x="160"
+							 data-y="440"
+							 data-speed="1100"
+							 data-start="1400"
+							 data-easing="Power3.easeInOut"
+							 data-elementdelay="0"
+							 data-endelementdelay="0"
+							 data-end="8000"
+							 data-endspeed="300"
+							 style="font-size:14px;text-transform:uppercase;">
+							<a style="color:#fff !important;" href="@s.Link">Ürünleri Gör</a>
+						</div>
+					</li>
+				
+			}
+			</ul>
+			</div>
+		
+		</div>	
+</div>
+	
+<!-- Slider END -->
+
+
+<!-- Suite area  BEGIN -->
+<section class="suite_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="sunglasses">
+					<br />
+					<br />
+					<br />
+					<h2>ÜRÜNLERE GÖRE ALIŞVERİŞ YAPIN</h2>
+					<div class="sun_span">
+						<span>SEZONUN EN HAVALI KOLEKSİYONU</span>
+					</div>
+					<div class="sun_line"></div>
+				</div>
+
+
+				@foreach (Product p in Model.Products)
+				{
+					<partial name="_Product" model="@p"/>
+				}
+
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Suite area  END -->

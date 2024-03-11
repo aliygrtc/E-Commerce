@@ -1,0 +1,56 @@
+﻿@model IOrderedQueryable<Slide>
+<div class="right_col" role="main">
+    <div class="">
+        
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Slayt Yönetim</h2>
+                        <a asp-controller="Slide" asp-action="New" class="btn btn-success float-right">Yeni Slayt</a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive">
+                                    
+                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Slayt Başlığı</th>
+                                                <th>Slogan</th>
+                                                <th>Link</th>
+                                                <th>Sıra</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>                                           
+                                            @foreach (Slide s in Model)
+                                            {
+                                                <tr>
+                                                    <td><a asp-controller="Slide" asp-action="Edit" asp-route-id="@s.ID">@s.Title</a></td>
+                                                    <td>@s.Slogan</td>
+                                                    <td>@s.Link</td>
+                                                    <td>@s.DisplayIndex</td>
+                                                    <td>
+                                                        <a asp-controller="Slide" asp-action="Delete" asp-route-id="@s.ID"  class="btn btn-outline-danger" style="color:red">Sil</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

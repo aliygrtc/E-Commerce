@@ -1,0 +1,54 @@
+﻿@model IOrderedQueryable<User>
+<div class="right_col" role="main">
+    <div class="">
+        
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Kullanıcı Yönetim</h2>
+                        <a asp-controller="User" asp-action="NewUser" class="btn btn-success float-right">Yeni Kullanıcı</a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive">
+                                    
+                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Ad Soyad</th>
+                                                <th>Kullanıcı Adı</th>
+                                                <th>Parola</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>                                           
+                                            @foreach (User s in Model)
+                                            {
+                                                <tr>
+                                                    <td><a asp-controller="User" asp-action="Edit" asp-route-id="@s.ID">@s.NameSurname</a></td>
+                                                    <td>@s.UserName</td>
+                                                    <td>@s.Password</td>
+                                                    <td>
+                                                        <a asp-controller="User" asp-action="Delete" asp-route-id="@s.ID"  class="btn btn-outline-danger" style="color:red">Sil</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

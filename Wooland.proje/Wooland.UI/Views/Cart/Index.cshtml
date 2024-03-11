@@ -1,0 +1,110 @@
+﻿@model List<Cart>
+
+<!-- Cart heading BEGIN -->
+<div class="cart_slider_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-5 col-xs-12">
+				<div class="cart_heading">
+					<h2 class="breadcumb_head">SEPETİM</h2>
+					
+					<div class="breadcumb_box">
+						<ul class="breadcumb_menu">
+							<li><a href="">ÜRÜNLER</a></li>
+							<li class="active"><a href="">SEPETİM</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Cart heading END -->
+<!-- Cart Area BEGIN -->
+<section class="cart_main_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 shop-cart-table">
+				<div class="cart_main">
+					<div class="row">
+						<div class="cart_head">
+							<div class="product_name">
+								<h5>ÜRÜN ADI</h5>
+							</div>
+							<div class="product_price">
+								<h5>FİYATI</h5>
+							</div>
+							<div class="product_quantity">
+								<h5>ADETİ</h5>
+							</div>
+							<div class="product_total">
+								<h5>TOPLAM FİYATI</h5>
+							</div>
+							<div class="product_remove">
+								<h5>KALDIR</h5>
+							</div>
+						</div>
+					</div>
+
+					
+							@foreach (Cart c in Model)
+							{
+						<div class="row">
+							<div class="cart_detail">
+								<div class="product_name">
+									<div class="product_cart_img">
+										<img src="@c.ProductPicture" alt="@c.ProductName" />
+									</div>
+									<div class="product_cart_text">
+										<h5>@c.ProductName</h5>
+									</div>
+								</div>
+								<div class="product_price">
+									<span>@c.ProductPrice</span>
+								</div>
+								<div class="product_quantity">
+									<div class="quantity">
+										<div id="">
+											<b>@c.Quantity</b>
+										</div>
+									</div>
+								</div>
+								<div class="product_total">
+
+									<span>@(c.Quantity * c.ProductPrice)</span>
+								</div>
+								<div class="product_remove">
+									<a onclick="removeCart(@c.ProductId)" class="fa fa-times" ></a>
+								</div>
+
+
+							</div>
+						</div>
+							}
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Cart Area END -->
+<!-- Cart Area subtotal BEGIN -->
+<section class="cart_subtotal_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-5 col-xs-12">
+				
+				
+			</div>
+			<div class="col-md-8 col-sm-8 col-xs-12">
+				
+				
+				<div class="checkout_cart">
+					<a asp-controller="Cart" asp-action="CheckOut">ÖDEME İŞLEMİNE DEVAM EDİN</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Cart Area subtotal END -->

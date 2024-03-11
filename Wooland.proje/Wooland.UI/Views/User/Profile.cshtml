@@ -1,0 +1,64 @@
+﻿@model UserVM
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">PANEL</h1>
+					<ol class="breadcrumb">
+						<li><a class="text-black" href="/">Ana Sayfa</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="user-dashboard page-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<br /> <br /><br />
+				<a class="btn btn-success" asp-controller="User" asp-action="New">Yeni Ürün</a>
+				<br /> <br /> <br />
+				<div class="dashboard-wrapper user-dashboard">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Ürün Adı</th>
+									<th>Markası</th>
+									<th>Kategorisi</th>
+									<th>Fiyatı</th>
+									<th>Durumu</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (Product p in Model.Products)
+								{
+									<tr>
+										<td>@p.Name</td>
+										<td>@p.Brand.Name</td>
+										<td>@p.Category.Name</td>
+										<td>@p.Price</td>
+										<td><span class="@(p.Status?"label label-success":"label label-danger")">
+											@(p.Status?"Aktif":"Pasif")
+											</span></td>
+
+										<td> <a asp-controller="User" asp-action="Edit" asp-route-productid="@p.ID" class="btn btn-default">Düzenle</a></td>
+
+										<td> <a asp-controller="User" asp-action="Delete" asp-route-productid="@p.ID" class="btn btn-danger" style="color:white">Sil</a></td>
+
+
+									</tr>
+								}
+							</tbody>
+						</table>
+						<br /><br /><br /><br /><br /> <br /><br /><br /><br />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,84 @@
+﻿@model User
+<div class="right_col" role="main">
+	<div class="">
+		
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 ">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>Kullanıcı Ekle</h2>
+						
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<br />
+						<form enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" asp-controller="User" asp-action="Insert" method="post">
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.NameSurname">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input asp-for="@Model.NameSurname" class="form-control" required>
+									<span asp-validation-for="@Model.NameSurname"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Email">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input asp-for="@Model.Email" class="form-control" required>
+									<span asp-validation-for="@Model.Email"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.UserName" >
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input asp-for="@Model.UserName" class="form-control " required>
+									<span asp-validation-for="@Model.UserName"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Password">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input asp-for="@Model.Password" class="form-control " required>
+									<span asp-validation-for="@Model.Password"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Status">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<select class="form-control" asp-for="@Model.Status">
+										<option value="true">Aktif</option>
+										<option value="false">Pasif</option>
+									</select>
+									<span asp-validation-for="@Model.Status"></span>
+								</div>
+							</div>
+
+			
+							<div class="ln_solid"></div>
+							<div class="item form-group">
+								<div class="col-md-6 col-sm-6 offset-md-3">
+									<a class="btn btn-primary" href="/admin/user">İptal</a>
+									<button class="btn btn-primary" type="reset">Temizle</button>
+									<button class="btn btn-success" type="submit">Kaydet</button>
+								</div>
+							</div>
+
+							@Html.AntiForgeryToken()
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</div>

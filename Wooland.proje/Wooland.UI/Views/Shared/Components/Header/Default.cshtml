@@ -1,0 +1,168 @@
+﻿@model IEnumerable<Category>
+<!-- Preloader START -->
+<div class="preloader_wrapper">
+    <div class="preloader">
+        <div class="square square--big square--top"></div>
+        <div class="square square--small square--top-left"></div>
+        <div class="square square--big square--right"></div>
+        <div class="square square--small square--top-right"></div>
+        <div class="square square--big square--left"></div>
+        <div class="square square--small square--bottom-right"></div>
+        <div class="square square--big square--bottom"></div>
+        <div class="square square--small square--bottom-left"></div>
+    </div>
+</div>
+<!-- Preloader END -->
+<!-- Header BEGIN -->
+<div class="header_top_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="logo">
+                    <a href="/"><img src="/images/logo.png" alt="logo" /></a>
+                </div>
+                <div class="devider">
+                    <img src="/images/devider.png" alt="devider" />
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-3 col-xs-12">
+                <div class="header_search">
+                    <input type="text" placeholder="Arama" />
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+
+            <div class="col-md-5 col-sm-6 col-xs-12">
+                <div class="header_social">
+                    <ul id="head_social">
+                        <li><a class="fa fa-facebook" href="https://www.facebook.com/login/?privacy_mutation_token=eyJ0eXBlIjowLCJjcmVhdGlvbl90aW1lIjoxNzA1NjY5Mjg0LCJjYWxsc2l0ZV9pZCI6MjY5NTQ4NDUzMDcyMDk1MX0%3D"></a></li>
+                        <li><a class="fa fa-twitter" href="https://twitter.com/i/flow/login?input_flow_data=%7B" requested_variant"%3A"eyJsYW5nIjoidHIifQ%3D%3D"%7D"></a></li>
+                        <li><a class="fa fa-instagram" href="https://www.instagram.com"></a></li>
+                    </ul>
+                </div>
+                <div class="header_currency">
+                    <ul id="head_currency">
+                        <li>
+                            <a href="/admin">Admin</a>                           
+                        </li>
+                    </ul>
+                </div>
+                <div class="header_cart">
+                    <div class="head_cart_img">
+                        <img src="/images/hd_cart.png" alt="" />
+                    </div>
+                    <div class="head_cart_text">
+                        <div class="head_cart_text_top">
+                            <a asp-controller="Cart" asp-action="Index"><p>SEPETİM (<small></small>)</p> </a>
+                        </div>
+                        <div class="head_cart_text_bottom">
+                            <a asp-controller="Cart" asp-action="CheckOut"><p>ÖDEME YAP</p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header END -->
+<!-- Navigation BEGIN -->
+<div class="main_nav">
+    <div class="container">
+        <div class="row">
+            <div class="cc-grid-1 no-padding">
+                <div class="nav_left">
+                    <a class="kategoriler">KATEGORİLER<i class="fa fa-chevron-right"></i></a>
+
+                </div>
+            </div>
+
+
+            <div class="cc-grid-2 no-padding">
+                <div class="nav_middle">
+                    <ul id="mainmenua_nav">
+
+                        @foreach (Category c in Model.Where(x => x.ParentID == null))
+                        {
+                            <li>
+                                <a asp-controller="Home" asp-action="ListShop" asp-route-categoryId="@c.ID" >@c.Name</a>
+                                <ul class="sub-menu2">
+                                    @if(c.SubCategories != null)
+                                    {
+                                        @foreach (Category subCategory in c.SubCategories)
+                                        {
+                                            <li><a class="col-12" asp-controller="Home" asp-action="ListShop" asp-route-categoryId="@subCategory.ID"><i class="fa fa-angle-right"></i>@subCategory.Name</a></li>
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+
+            <!--LOGİN-->
+
+            @if (ViewBag.Login == 0)
+            {
+                <div class="cc-grid-3 padding">
+                    <div class="nav_right">
+                        <a asp-controller="User" asp-action="Login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GİRİŞ YAP</a>
+                        <div class="dropdown-inner-log">
+                            <div class="drop_inner_login">
+
+                                <form>
+
+                                    <div class="sub_log">
+                                        
+                                        <div class="forgot_pw">
+                                            <em class="kategoriler">Hesabın Yok Mu? </em>
+                                            <a asp-controller="Account" asp-action="NewRegister"><i class="fa fa-angle-double-right"></i>Kayıt Ol</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="member_log">
+                                <br />
+                                <em style="color:black" >WOOLAND SHOPPING</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="cc-grid-3 no-padding">
+                    <div class="nav_right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="User" asp-action="Profile" class="home_login">&nbsp;&nbsp;&nbsp;&nbsp;@User.Claims.First(x => x.Type == "adsoyad").Value</a>
+                        }
+                        <div class="dropdown-inner-log">
+                            <div class="drop_inner_login">
+                                
+                                <form>
+                                    
+                                    <div class="sub_log">
+                                        <input asp-controller="User" asp-action="Profile" type="submit" value="Profil" />
+                                        <div class="forgot_pw">
+                                            <br />
+                                            <a asp-controller="User" asp-action="LogOut"><i class="fa fa-angle-double-right"></i>Oturumu Kapat</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="member_log" >
+                                <br />
+                                <em style="color:black" text-align="center">WOOLAND SHOPPING</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+<!-- Navigation END -->
