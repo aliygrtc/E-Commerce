@@ -1,0 +1,94 @@
+﻿@model UserVM
+
+<section class="contact_page_form_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sx-12 col-xs-12">
+                <div class="contact_page_form">
+                    <div class="contact_page_form_head">
+                        <br />
+                        <h1>ÜRÜN EKLE</h1>
+                        <span>FORM DOLDUR</span>
+                    </div>
+                    <div class="contact_page_forms">
+                        <form enctype="multipart/form-data" asp-controller="User" asp-action="Insert" method="post">
+                            <input asp-for="@Model.Product.ID" type="hidden" />
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.Name"></label>
+                                <input asp-for="@Model.Product.Name" placeholder="Ürün Adı" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.BrandID"></label>
+                                <select class="form-control" asp-for="@Model.Product.BrandID" asp-items="@Model.Brands.Select(x => new SelectListItem{Text = x.Name, Value=x.ID.ToString()})" required>
+                                    <option value="">Marka Seçiniz</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.CategoryID"></label>
+                                <select class="form-control" asp-for="@Model.Product.CategoryID" asp-items="@Model.Categories.Select(x => new SelectListItem{Text = x.Name, Value=x.ID.ToString()})" required>
+                                    <option value="">Kategori Seçiniz</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.Price"></label>
+                                <input asp-for="@Model.Product.Price" placeholder="Fiyatı" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ürün Fotoğrafı</label>
+                                <input asp-for="@Model.Product.ProductPicture" class="form-control " type="file" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.Star"></label>
+                                <input id="starInput" type="number" asp-for="@Model.Product.Star" class="form-control" />
+                                <span asp-validation-for="@Model.Product.Star" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.Stock"></label>
+                                <input asp-for="@Model.Product.Stock" placeholder="Stok" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.Description"></label>
+                                <textarea asp-for="@Model.Product.Description" placeholder="Ürün Açıklaması" class="form-control" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.Detail"></label>
+                                <textarea asp-for="@Model.Product.Detail" placeholder="Detay" class="form-control" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.CargoDetail"></label>
+                                <textarea asp-for="@Model.Product.CargoDetail" placeholder="Kargo Detayı" class="form-control" required></textarea>
+                            </div>
+
+                            <div id="cf-submit">
+                                <input type="submit" id="contact-submit" value="EKLE" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    
+    var starInput = document.getElementById('starInput');
+
+    var maxLength = 5;
+
+    starInput.addEventListener('input', function () {
+        
+        if (parseInt(starInput.value) > maxLength) {
+            starInput.value = maxLength;
+        }
+    });
+</script>

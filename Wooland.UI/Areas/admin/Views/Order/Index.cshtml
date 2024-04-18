@@ -1,0 +1,78 @@
+﻿@model IOrderedQueryable<Order>
+<div class="right_col" role="main">
+    <div class="">
+
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Sipariş Yönetim</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="x_content">
+
+                        
+
+                        <div class="table-responsive">
+                            <table class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                    <tr class="headings">
+                                        <th>
+                                            
+                                        </th>
+                                        <th class="column-title">Adı Soyadı </th>
+                                        <th class="column-title">Sipariş Tarihi </th>
+                                        <th class="column-title">Telefon Numarası </th>
+                                        <th class="column-title">Sipariş Numarası </th>
+                                        <th class="column-title">Posta Kodu </th>
+                                        <th class="column-title">Şehir </th>
+                                        
+                                        <th class="column-title no-link last">
+                                            <span class="nobr">Action</span>
+                                        </th>
+                                        <th class="bulk-actions" colspan="7">
+                                            <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                                @foreach (Order o in Model)
+                                    {
+                                        <tr class="even pointer">
+                                            <td class="a-center "></td>
+                                            <td class=" ">@o.NameSurname</td>
+                                            <td class=" ">@o.RecDate </td>
+                                            <td class=" ">@o.PhoneNumber</td>
+                                            <td class=" ">@o.OrderNumber</td>
+                                            <td class=" ">@o.ZipCode</td>
+                                            <td class="">@o.City</td>
+                                            <td class=" last">
+                                                <a href="">View</a>
+                                            </td>
+                                        </tr>
+                                    }              
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

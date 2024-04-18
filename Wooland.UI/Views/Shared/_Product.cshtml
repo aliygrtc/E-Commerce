@@ -1,0 +1,86 @@
+﻿@model Product
+<div class="col-md-3 col-sm-3 col-xs-12">
+	<div class="single_suite">
+		<div class="hover_img single_suite_img1 effect">
+			@if (Model.ProductPicture.Any())
+			{
+				<a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.ID" asp-route-name="@Model.Name"><img src="@Model.ProductPicture.FirstOrDefault().Picture" alt="@Model.Name"/></a>
+			}
+			else
+			{
+				<img> <img src="/img/hazirlaniyor.jpg" alt="@Model.Name"/>
+			}			
+			<div class="common_overlay"></div>
+		</div>
+
+
+		<div class="single_suite_text">
+			<a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.ID" asp-route-name="@Model.Name"><h3>@Model.Name</h3></a>
+		</div>
+
+
+		<div class="single_suite_left">
+			<div class="suite_left_p"><p>$@Model.Price</p></div>
+		</div>
+
+		<div class="single_suite_right">
+			<ul>
+				@{
+					int sayac = 5;
+				}
+				@for (int i = 1; i <= Model.Star; i++)
+				{
+					<li><a class="fa fa-star" ></a></li>
+					sayac--;
+				}
+				@for (int i = 1; i <= sayac; i++)
+				{
+					<li><a class="fa fa-star-o"></a></li>
+				}
+			</ul>
+		</div>
+	</div>
+</div>
+
+    <!--MODAL-->
+
+<div class="modal fade" id="pro_@Model.ID" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="m_img_left">
+
+					@if (Model.ProductPicture.Any())
+					{
+						<a href="shop-detail.html"> <img src="@Model.ProductPicture.FirstOrDefault().Picture" alt="@Model.Name" /></a>
+					}
+					else
+					{
+						<a href="shop-detail.html"> <img src="/img/hazirlaniyor.jpg" alt="@Model.Name" /></a>
+					}
+
+				</div>
+				<div class="p_detail_right">
+					<div class="p_slider_box_details">
+						<a href="shop-detail.html"><h3>@Model.Name</h3></a>
+						<div class="single_suite_right">
+							<ul>
+								<li><a class="fa fa-star" href="#"></a></li>
+								<li><a class="fa fa-star" href="#"></a></li>
+								<li><a class="fa fa-star" href="#"></a></li>
+								<li><a class="fa fa-star" href="#"></a></li>
+								<li><a class="fa fa-star-o" href="#"></a></li>
+							</ul>
+						</div>
+						<p>@Model.Description</p>
+					</div>
+					
+					
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a asp-controller="Product" asp-action="Detail" asp-route-name="@Model.Name" asp-route-id="@Model.ID" class="btn btn-default" style="color:black">Ürünün Detayları</a>
+			</div>
+		</div>
+	</div>
+</div>

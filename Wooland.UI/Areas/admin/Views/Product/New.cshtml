@@ -1,0 +1,184 @@
+﻿@model ProductVM
+<div class="right_col" role="main">
+	<div class="">
+		
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 ">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>Ürün Ekle</h2>
+						
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<br />
+						<form enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" asp-controller="Product" asp-action="Insert" method="post">
+
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.Name" >
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input asp-for="@Model.Product.Name" class="form-control " required>
+									<span asp-validation-for="@Model.Product.Name"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.UserID">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<select class="form-control" asp-for="@Model.Product.UserID" asp-items="@Model.Users.Select(x => new SelectListItem{Text = x.UserName, Value = x.ID.ToString()})" required>
+										<option value="">Kullanıcı Seçin</option>
+									</select>
+									<span asp-validation-for="@Model.Product.UserID"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.Status">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<select class="form-control" asp-for="@Model.Product.Status">
+										<option value="true">Aktif</option>
+										<option value="false">Pasif</option>
+									</select>
+									<span asp-validation-for="@Model.Product.Status"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.BrandID">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<select class="form-control" asp-for="@Model.Product.BrandID" asp-items="@Model.Brands.Select(x => new SelectListItem{Text = x.Name, Value = x.ID.ToString()})" required>
+										<option value="">Marka Seçin</option>
+									</select>
+									<span asp-validation-for="@Model.Product.BrandID"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.CategoryID">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<select class="form-control" asp-for="@Model.Product.CategoryID" required>
+										<option value="">Kategori Seçin</option>
+										@foreach (var item in Model.Categories)
+										{
+											<option value="@item.ID">
+												@if(item.ParentID == null)
+												{
+													Write(item.Name);
+												}
+												else
+												{
+													Write(item.ParentCategory.Name + ">" + item.Name);
+												}
+
+											</option>
+										}
+									</select>
+									<span asp-validation-for="@Model.Product.CategoryID"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.Price">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input asp-for="@Model.Product.Price" class="form-control " required>
+									<span asp-validation-for="@Model.Product.Price"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.Star"></label>
+								<div class="col-md-6 col-sm-6 ">
+
+									<input id="starInput" type="number" asp-for="@Model.Product.Star" class="form-control" />
+									<span asp-validation-for="@Model.Product.Star" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.Stock">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input asp-for="@Model.Product.Stock" class="form-control " required>
+									<span asp-validation-for="@Model.Product.Stock"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.Description">
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input asp-for="@Model.Product.Description" class="form-control " required>
+									<span asp-validation-for="@Model.Product.Description"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.Detail"></label>
+
+								<div class="col-md-6 col-sm-6 ">
+									<textarea class="form-control editor1" asp-for="@Model.Product.Detail" required>
+									</textarea>
+									<span asp-validation-for="@Model.Product.Detail"></span>
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.Product.CargoDetail"></label>
+
+								<div class="col-md-6 col-sm-6 ">
+									<textarea class="form-control editor1" asp-for="@Model.Product.CargoDetail" required>
+									</textarea>
+									<span asp-validation-for="@Model.Product.CargoDetail"></span>
+								</div>
+							</div>
+
+
+							<div class="ln_solid"></div>
+							<div class="item form-group">
+								<div class="col-md-6 col-sm-6 offset-md-3">
+									<a class="btn btn-primary" href="/admin/Product">İptal</a>
+									<button class="btn btn-primary" type="reset">Temizle</button>
+									<button type="submit" class="btn btn-success">Kaydet</button>
+								</div>
+							</div>
+
+							@Html.AntiForgeryToken()
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</div>
+
+@section customScripts {
+    <script src="~/admin/ckeditor/ckeditor.js"></script>
+	<script>
+		$(".editor1").each(function () {
+			CKEDITOR.replace($(this).attr("id"))
+		});
+	</script>
+}
+
+<script>
+
+	var starInput = document.getElementById('starInput');
+
+	var maxLength = 5;
+
+	starInput.addEventListener('input', function () {
+
+		if (parseInt(starInput.value) > maxLength) {
+			starInput.value = maxLength;
+		}
+	});
+</script>

@@ -1,0 +1,173 @@
+﻿@model CheckOutVM
+
+@{
+	decimal totalCart = Model.Carts.Sum(x => x.Quantity * x.ProductPrice);
+	decimal shippingFee = 100;
+	if (totalCart >= ViewBag.ShippingFee) shippingFee = 0;
+}
+
+<!-- Checkout heading BEGIN -->
+<div class="cart_slider_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-5 col-xs-12">
+				<div class="cart_heading">
+					<h2 class="breadcumb_head">ÖDEME YAP</h2>
+					
+					<div class="breadcumb_box">
+						<ul class="breadcumb_menu">
+							<li><a href="">Alışveriş</a></li>
+							<li class="active"><a href="">Ödeme Yap</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Checkout heading END -->
+
+
+<!-- Checkout area BEGIN -->
+<section class="checkout_main_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-sm-8 col-xs-12">
+				<div class="checkout_box">
+					<div class="billing_detail_heading">
+						<h4>Teslimat Detayları</h4>
+					</div>
+					<form asp-controller="Cart" asp-action="CheckOut" method="post" role="form">
+						
+
+						<div class="checkout_double_form">
+							<div class="checkout_double_left">
+								<label asp-for="@Model.Order.NameSurname"></label>
+								<input type="text" asp-for="@Model.Order.NameSurname" required/>
+							</div>
+
+							<div class="checkout_double_right">
+								<label asp-for="@Model.Order.PhoneNumber"></label>
+								<input type="text" asp-for="@Model.Order.PhoneNumber" required/>
+							</div>
+
+						</div>
+
+						<div class="checkout_double_form">
+							<div class="checkout_double_left">
+								<label asp-for="@Model.Order.Country"></label>
+								<input type="text" asp-for="@Model.Order.Country" required />
+							</div>
+
+							<div class="checkout_double_right">
+								<label asp-for="@Model.Order.City"></label>
+								<input type="text" asp-for="@Model.Order.City" required />
+							</div>
+
+						</div>
+						<div class="checkout_single_form">
+							<label asp-for="@Model.Order.Address"></label>
+							<input type="text" asp-for="@Model.Order.Address" required />
+						</div>
+						
+						<div class="checkout_double_left">
+							<label asp-for="@Model.Order.ZipCode"></label>
+							<input type="text" asp-for="@Model.Order.ZipCode" required />
+						</div>
+
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+
+						<div class="billing_detail_heading">
+							<h4>Kredi Kartı Detayları</h4>
+						</div><br />
+						
+						<div class="checkout_double_form">
+							<div class="checkout_double_left">
+								<label asp-for="@Model.Order.CardNumber"><span class="required">Kart Numarası</span></label>
+								<input placeholder="•••• •••• •••• ••••" maxlength="16" asp-for="@Model.Order.CardNumber" required>
+							</div>
+							<div class="checkout_double_right">
+								<label asp-for="@Model.Order.CardCv2"></label>
+								<input placeholder="•••" type="text" maxlength="3" asp-for="@Model.Order.CardCv2" required />
+							</div>
+						</div>
+						
+						<div class="checkout_double_form">
+							<div class="checkout_double_left">
+								<label for="card-expiry" asp-for="@Model.Order.CardMonth"><span class="required">AY</span></label>
+								<select class="form-control" asp-for="@Model.Order.CardMonth">
+									@for (int i = 1; i <= 12; i++)
+									{
+										<option>@i</option>
+									}
+								</select>
+							</div>
+
+							<div class="checkout_double_right">
+								<label for="card-expiry" asp-for="@Model.Order.CardYear"><span class="required">YIL</span></label>
+								<select class="form-control" asp-for="@Model.Order.CardYear">
+									@for (int i = DateTime.Now.Year; i <= DateTime.Now.AddYears(10).Year; i++)
+									{
+										<option>@i</option>
+									}
+								</select>
+							</div>
+							</div>
+
+						<div class="checkout_single_submit">
+							<input  type="submit" value="ÖDEME YAP">
+						</div>
+					</form>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<div class="checkout_right">
+
+					
+						<div class="order_info_up">
+
+							<h4>Sepetteki Ürünler</h4>
+							@foreach (Cart c in Model.Carts)
+							{
+							<div class="c_single_item">
+								<p>@c.ProductName</p>
+								<span>$@c.ProductPrice</span>
+							</div>
+							}
+							<div class="c_single_item">
+								<p>Toplam:</p>
+								<span>$@totalCart </span>
+							</div>
+							<div class="c_single_item last-c-item">
+								<p>Kargo Ücreti</p>
+								<span>
+								@if (shippingFee == 0)
+									{
+										<span>Kargo Bedava</span>
+									}
+									else
+									{
+										<span>@shippingFee</span>
+									}
+								</span>
+							</div>
+
+							<div class="c_total_item">
+								<p>Sepet Toplamı:</p>
+								<span>$@(totalCart + shippingFee)</span>
+							</div>
+						</div>
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Checkout area END -->

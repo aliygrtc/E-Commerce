@@ -1,0 +1,90 @@
+﻿@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Admin Giriş</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/admin/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/admin/bootstrapp/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/admin/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/admin/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/admin/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/admin/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/admin/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/admin/select22/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/admin/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/admin/util.css">
+	<link rel="stylesheet" type="text/css" href="/admin/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100">
+				<form action="/admin/login" method="post"
+					  class="login100-form validate-form">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="username" placeholder="Kullanıcı Adı">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="password" placeholder="Şifre">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>					
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit"> 
+							Giriş Yap
+						</button>
+					</div>
+					@Html.AntiForgeryToken()
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="/admin/jqueryy/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/admin/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/admin/bootstrapp/js/popper.js"></script>
+	<script src="/admin/bootstrapp/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/admin/select22/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/admin/daterangepicker/moment.min.js"></script>
+	<script src="/admin/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="/admin/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="/admin/main.js"></script>
+
+</body>
+</html>

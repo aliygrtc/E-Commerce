@@ -1,0 +1,199 @@
+﻿@model Product
+<div class="cart_slider_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="cart_heading">
+                    <h2 class="breadcumb_head">DETAY</h2>
+                    <div class="breadcumb_box">
+                        <ul class="breadcumb_menu">
+                            <li><a href="/">Ürünler</a></li>
+                            <li class="active"><a href="">ÜRÜN DETAYLARI</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="single-protfolio-area ptb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="portfolio-thumbnil-area">
+                    <div class="product-more-views">
+                        <div class="tab_thumbnail" data-tabs="tabs">
+                            <div class="thumbnail-carousel">
+                                <ul class="nav">
+                                    @{
+                                        int i = 0;
+                                    }
+                                    @foreach (var pp in Model.ProductPicture)
+                                    {
+                                        <li role="presentation" class="@(i == 0 ? "active" : "")">
+                                            <a href="#view@(i+11)" aria-controls="view@(i+11)" role="tab" data-toggle="tab">
+                                                <img src="@pp.Picture" alt="@pp.Name" />
+                                            </a>
+                                        </li>
+                                        i++;
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content active-portfolio-area pos-rltv">
+                        @{
+                            i = 0;
+                        }
+                        @if(Model.ProductPicture.Count > 0)
+                        {
+                            @foreach (var pp in Model.ProductPicture)
+                            {
+                                <div role="tabpanel" class="tab-pane @(i == 0 ? "active" : "")" id="view@(i+11)">
+                                    <div class="product-img">
+                                        <a>
+                                            <img src="@pp.Picture" alt="@pp.Name" />
+                                        </a>
+                                    </div>
+                                </div>
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            <div role="tabpanel" class="tab-pane @(i == 0 ? "active" : "")" id="view@(i+11)">
+                                <div class="product-img">
+                                    <a>
+                                        <img src="/img/hazirlaniyor.jpg" alt="@Model.Name" />
+                                    </a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="single-product-description">
+                    <div class="sp-top-des">
+                        <br /> <br />
+                        <h3>@Model.Name</h3> 
+                        <div class="prodcut-ratting-price">
+                            <div class="prodcut-ratting">
+                                @{
+                                    int sayac = 5;
+                                }
+                                @for (int x = 1; x <= Model.Star; x++)
+                                {
+                                    <a class="fa fa-star"></a>
+                                    sayac--;
+                                }
+                                @for (int x = 1; x <= sayac; x++)
+                                {
+                                    <a class="fa fa-star-o"></a>
+                                }
+                            </div>
+                            <div class="prodcut-price">
+                                <div class="new-price"> $@Model.Price </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sp-des">
+                        <p>@Model.Description</p>
+                    </div>
+                    <div class="sp-bottom-des">
+                        
+                        <div class="quantity-area">
+                            <label>Adet : </label>
+                            <div class="cart-quantity">
+                                <form action="#" method="POST" id="myform">
+                                    <div class="product-qty">
+                                        <div class="cart-quantity">
+                                            <div class="cart-plus-minus">
+                                                <div class="dec qtybutton">-</div>
+                                                <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
+                                                <div class="inc qtybutton">+</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="social-icon socile-icon-style-1">
+                            
+                                <button onclick="addCart(@Model.ID, @Model.Stock)" class="add_cart">Sepete Ekle &nbsp;<i class="fa fa-cart-plus"></i></button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="descripton-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product-area tab-cars-style">
+                    <div class="title-tab-product-category row">
+                        <div class="col-lg-12 text-center">
+                            <ul class="nav mb-40 heading-style-2" role="tablist">
+                                <li role="presentation"><a class="active" href="#newarrival" aria-controls="newarrival" role="tab" data-bs-toggle="tab">Ürün Detayları</a></li>
+                                <li role="presentation"><a href="#bestsellr" aria-controls="bestsellr" role="tab" data-bs-toggle="tab">Kargo Detayları</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12">
+                        <div class="content-tab-product-category">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fix fade show active" id="newarrival">
+                                    <div class="review-wraper">
+                                        <p>
+                                            
+                                            @Html.Raw(Model.Detail)
+                                        </p>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fix fade in" id="bestsellr">
+                                    <div class="review-wraper">
+                                        <p>
+                                            @Html.Raw(Model.CargoDetail)
+                                        </p>
+                                    </div>
+                                </div>
+                                <br /> <br /><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modalSepet" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title fa fa-bell"> Bildirim!</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" href="/">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
